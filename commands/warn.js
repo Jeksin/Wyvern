@@ -1,8 +1,9 @@
 module.exports = {
     name: 'warn',
     async run(client, message, args) {
-        const { errorPermissions } = require('../errors.js')
+        const { errorPermissions, warnNullArgs } = require('../errors.js')
 
-        if(!message.author.hasPermission("BAN_MEMBER")) return message.channel.send(errorPermissions)
+        if(!message.member.hasPermission("BAN_MEMBER")) return message.channel.send(errorPermissions);
+        if(!args[0]) return message.channel.send(warnNullArgs);
     }
 }
